@@ -1,0 +1,494 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Function Reference &mdash; NLDI Crawler  documentation</title>
+      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="_static/doctools.js"></script>
+        <script src="_static/sphinx_highlight.js"></script>
+        <script src="https://unpkg.com/mermaid/dist/mermaid.min.js"></script>
+        <script>mermaid.initialize({startOnLoad:true});</script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="prev" title="Sources Table" href="source_table.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="index.html" class="icon icon-home"> NLDI Crawler
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="LICENSE.html">LICENSE</a></li>
+<li class="toctree-l1"><a class="reference internal" href="CODE_OF_CONDUCT.html">Code of Conduct</a></li>
+<li class="toctree-l1"><a class="reference internal" href="CONTRIBUTING.html">Contributing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="usage.html">Usage Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="workflow.html">Workflow</a></li>
+<li class="toctree-l1"><a class="reference internal" href="source_table.html">Sources Table</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Function Reference</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#nldi_crawler.source.CrawlerSource"><code class="docutils literal notranslate"><span class="pre">CrawlerSource</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#nldi_crawler.source.CrawlerSource.table_name"><code class="docutils literal notranslate"><span class="pre">CrawlerSource.table_name()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#nldi_crawler.source.download_geojson"><code class="docutils literal notranslate"><span class="pre">download_geojson()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#nldi_crawler.source.list_sources"><code class="docutils literal notranslate"><span class="pre">list_sources()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#nldi_crawler.source.validate_src"><code class="docutils literal notranslate"><span class="pre">validate_src()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#nldi_crawler.db.DataAccessLayer"><code class="docutils literal notranslate"><span class="pre">DataAccessLayer</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#nldi_crawler.db.DataAccessLayer.Session"><code class="docutils literal notranslate"><span class="pre">DataAccessLayer.Session()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#nldi_crawler.db.DataAccessLayer.connect"><code class="docutils literal notranslate"><span class="pre">DataAccessLayer.connect()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#nldi_crawler.db.DataAccessLayer.disconnect"><code class="docutils literal notranslate"><span class="pre">DataAccessLayer.disconnect()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#nldi_crawler.db.NLDI_Base"><code class="docutils literal notranslate"><span class="pre">NLDI_Base</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#nldi_crawler.ingestor.StrippedString"><code class="docutils literal notranslate"><span class="pre">StrippedString</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#nldi_crawler.ingestor.StrippedString.cache_ok"><code class="docutils literal notranslate"><span class="pre">StrippedString.cache_ok</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#nldi_crawler.ingestor.StrippedString.impl"><code class="docutils literal notranslate"><span class="pre">StrippedString.impl</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#nldi_crawler.ingestor.StrippedString.process_bind_param"><code class="docutils literal notranslate"><span class="pre">StrippedString.process_bind_param()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#nldi_crawler.ingestor.create_tmp_table"><code class="docutils literal notranslate"><span class="pre">create_tmp_table()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#nldi_crawler.ingestor.ingest_from_file"><code class="docutils literal notranslate"><span class="pre">ingest_from_file()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#nldi_crawler.ingestor.install_data"><code class="docutils literal notranslate"><span class="pre">install_data()</span></code></a></li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">NLDI Crawler</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home"></a></li>
+      <li class="breadcrumb-item active">Function Reference</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/reference.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="module-nldi_crawler.source">
+<span id="function-reference"></span><h1>Function Reference<a class="headerlink" href="#module-nldi_crawler.source" title="Permalink to this heading"></a></h1>
+<p>routines to manage the table of crawler_sources</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="nldi_crawler.source.CrawlerSource">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">nldi_crawler.source.</span></span><span class="sig-name descname"><span class="pre">CrawlerSource</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#nldi_crawler.source.CrawlerSource" title="Permalink to this definition"></a></dt>
+<dd><p>An ORM reflection of the crawler_source table</p>
+<p>The crawler_source table is held in the nldi_data schema in the NLDI PostGIS database.
+The schema name and table name are hard-coded to reflect this.</p>
+<p>This object maps properties to columns for a given row of that table. Once this object
+is created, the row’s data is instantiated within the object.</p>
+<dl class="simple">
+<dt>&gt; stmt = select(CrawlerSource)</dt><dd><p>.order_by(CrawlerSource.crawler_source_id)
+.where(CrawlerSource.crawler_source_id == 1)</p>
+</dd>
+</dl>
+<p>&gt; for src in session.scalars(stmt):
+… print(f”{src.crawler_source_id} == {src.source_name}”)</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="nldi_crawler.source.CrawlerSource.table_name">
+<span class="sig-name descname"><span class="pre">table_name</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#nldi_crawler.source.CrawlerSource.table_name" title="Permalink to this definition"></a></dt>
+<dd><p>Getter-like function to return a formatted string representing the table name.</p>
+<p>If an optional positional argument is given, that string is appended to the table name.
+This lets us do things like:</p>
+<p>&gt; self.table_name()
+feature_suffix
+&gt; self.table_name(“temp”)
+feature_suffix_temp
+&gt; self.table_name(“old”)
+feature_suffix_old</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>name of the table for this crawler_source</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>string</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="nldi_crawler.source.download_geojson">
+<span class="sig-prename descclassname"><span class="pre">nldi_crawler.source.</span></span><span class="sig-name descname"><span class="pre">download_geojson</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">source</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#nldi_crawler.source.download_geojson" title="Permalink to this definition"></a></dt>
+<dd><p>Downloads data from the specified source, saving it to a temporary file on local disk.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>source</strong> (<a class="reference internal" href="#nldi_crawler.source.CrawlerSource" title="nldi_crawler.source.CrawlerSource"><em>CrawlerSource</em></a><em>(</em><em>)</em>) – The descriptor for the source.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>path name to temporary file</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="nldi_crawler.source.list_sources">
+<span class="sig-prename descclassname"><span class="pre">nldi_crawler.source.</span></span><span class="sig-name descname"><span class="pre">list_sources</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dal</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">selector</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#nldi_crawler.source.list_sources" title="Permalink to this definition"></a></dt>
+<dd><p>Fetches a list of crawler sources from the master NLDI-DB database.  The returned list
+holds one or mor CrawlerSource() objects, which are reflected from the database using
+the sqlalchemy ORM.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>connect_string</strong> (<em>str</em>) – The db URL used to connect to the database</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>A list of sources</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>list of CrawlerSource objects</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="nldi_crawler.source.validate_src">
+<span class="sig-prename descclassname"><span class="pre">nldi_crawler.source.</span></span><span class="sig-name descname"><span class="pre">validate_src</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">src</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#nldi_crawler.source.validate_src" title="Permalink to this definition"></a></dt>
+<dd><p>Examines a specified source to ensure that it downloads, and the returned data is
+proprly formatted and attributed.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>src</strong> (<a class="reference internal" href="#nldi_crawler.source.CrawlerSource" title="nldi_crawler.source.CrawlerSource"><em>CrawlerSource</em></a>) – the source to examine</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>a tuple of two values: A boolean to indicate if validated, and a string holding
+a description of the reason for failure. If validated is True, the reason string
+is zero-length.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>tuple</p>
+</dd>
+</dl>
+</dd></dl>
+
+<span class="target" id="module-nldi_crawler.db"></span><p>classes and functions surrounding database access</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="nldi_crawler.db.DataAccessLayer">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">nldi_crawler.db.</span></span><span class="sig-name descname"><span class="pre">DataAccessLayer</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">uri=postgresql+psycopg2://read_only_user&#64;localhost:5432/nldi</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#nldi_crawler.db.DataAccessLayer" title="Permalink to this definition"></a></dt>
+<dd><p>Abstraction layer to hold connection details for the data we want to access
+via the DB connection</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="nldi_crawler.db.DataAccessLayer.Session">
+<span class="sig-name descname"><span class="pre">Session</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#nldi_crawler.db.DataAccessLayer.Session" title="Permalink to this definition"></a></dt>
+<dd><p>Opens a sqlalchemy.orm.Session() using the engine defined at instatiation time.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="nldi_crawler.db.DataAccessLayer.connect">
+<span class="sig-name descname"><span class="pre">connect</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#nldi_crawler.db.DataAccessLayer.connect" title="Permalink to this definition"></a></dt>
+<dd><p>opens a connection to the database. Sets self.engine as the way to access that connection.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="nldi_crawler.db.DataAccessLayer.disconnect">
+<span class="sig-name descname"><span class="pre">disconnect</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#nldi_crawler.db.DataAccessLayer.disconnect" title="Permalink to this definition"></a></dt>
+<dd><p>closes the open engine</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="nldi_crawler.db.NLDI_Base">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">nldi_crawler.db.</span></span><span class="sig-name descname"><span class="pre">NLDI_Base</span></span><a class="headerlink" href="#nldi_crawler.db.NLDI_Base" title="Permalink to this definition"></a></dt>
+<dd><p>Base class used to create reflected ORM objects.</p>
+</dd></dl>
+
+<span class="target" id="module-nldi_crawler.ingestor"></span><p>routines to manage the ingestion of crawler sources</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="nldi_crawler.ingestor.StrippedString">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">nldi_crawler.ingestor.</span></span><span class="sig-name descname"><span class="pre">StrippedString</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#nldi_crawler.ingestor.StrippedString" title="Permalink to this definition"></a></dt>
+<dd><p>Custom type to extend String.  We use this to forcefully remove any non-printing characters
+from the input string. Some non-printables (including backspace and delete), if included
+in the String, can mess with the SQL submitted by the connection engine.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="nldi_crawler.ingestor.StrippedString.cache_ok">
+<span class="sig-name descname"><span class="pre">cache_ok</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">bool</span><span class="p"><span class="pre">]</span></span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">True</span></em><a class="headerlink" href="#nldi_crawler.ingestor.StrippedString.cache_ok" title="Permalink to this definition"></a></dt>
+<dd><p>Indicate if statements using this <code class="xref py py-class docutils literal notranslate"><span class="pre">ExternalType</span></code> are “safe to
+cache”.</p>
+<p>The default value <code class="docutils literal notranslate"><span class="pre">None</span></code> will emit a warning and then not allow caching
+of a statement which includes this type.   Set to <code class="docutils literal notranslate"><span class="pre">False</span></code> to disable
+statements using this type from being cached at all without a warning.
+When set to <code class="docutils literal notranslate"><span class="pre">True</span></code>, the object’s class and selected elements from its
+state will be used as part of the cache key.  For example, using a
+<code class="xref py py-class docutils literal notranslate"><span class="pre">TypeDecorator</span></code>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">MyType</span><span class="p">(</span><span class="n">TypeDecorator</span><span class="p">):</span>
+    <span class="n">impl</span> <span class="o">=</span> <span class="n">String</span>
+
+    <span class="n">cache_ok</span> <span class="o">=</span> <span class="kc">True</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">choices</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">choices</span> <span class="o">=</span> <span class="nb">tuple</span><span class="p">(</span><span class="n">choices</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">internal_only</span> <span class="o">=</span> <span class="kc">True</span>
+</pre></div>
+</div>
+<p>The cache key for the above type would be equivalent to:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">MyType</span><span class="p">([</span><span class="s2">&quot;a&quot;</span><span class="p">,</span> <span class="s2">&quot;b&quot;</span><span class="p">,</span> <span class="s2">&quot;c&quot;</span><span class="p">])</span><span class="o">.</span><span class="n">_static_cache_key</span>
+<span class="go">(&lt;class &#39;__main__.MyType&#39;&gt;, (&#39;choices&#39;, (&#39;a&#39;, &#39;b&#39;, &#39;c&#39;)))</span>
+</pre></div>
+</div>
+<p>The caching scheme will extract attributes from the type that correspond
+to the names of parameters in the <code class="docutils literal notranslate"><span class="pre">__init__()</span></code> method.  Above, the
+“choices” attribute becomes part of the cache key but “internal_only”
+does not, because there is no parameter named “internal_only”.</p>
+<p>The requirements for cacheable elements is that they are hashable
+and also that they indicate the same SQL rendered for expressions using
+this type every time for a given cache value.</p>
+<p>To accommodate for datatypes that refer to unhashable structures such
+as dictionaries, sets and lists, these objects can be made “cacheable”
+by assigning hashable structures to the attributes whose names
+correspond with the names of the arguments.  For example, a datatype
+which accepts a dictionary of lookup values may publish this as a sorted
+series of tuples.   Given a previously un-cacheable type as:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">LookupType</span><span class="p">(</span><span class="n">UserDefinedType</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39;a custom type that accepts a dictionary as a parameter.</span>
+
+<span class="sd">    this is the non-cacheable version, as &quot;self.lookup&quot; is not</span>
+<span class="sd">    hashable.</span>
+
+<span class="sd">    &#39;&#39;&#39;</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">lookup</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">lookup</span> <span class="o">=</span> <span class="n">lookup</span>
+
+    <span class="k">def</span> <span class="nf">get_col_spec</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kw</span><span class="p">):</span>
+        <span class="k">return</span> <span class="s2">&quot;VARCHAR(255)&quot;</span>
+
+    <span class="k">def</span> <span class="nf">bind_processor</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">dialect</span><span class="p">):</span>
+        <span class="c1"># ...  works with &quot;self.lookup&quot; ...</span>
+</pre></div>
+</div>
+<p>Where “lookup” is a dictionary.  The type will not be able to generate
+a cache key:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">type_</span> <span class="o">=</span> <span class="n">LookupType</span><span class="p">({</span><span class="s2">&quot;a&quot;</span><span class="p">:</span> <span class="mi">10</span><span class="p">,</span> <span class="s2">&quot;b&quot;</span><span class="p">:</span> <span class="mi">20</span><span class="p">})</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">type_</span><span class="o">.</span><span class="n">_static_cache_key</span>
+<span class="go">&lt;stdin&gt;:1: SAWarning: UserDefinedType LookupType({&#39;a&#39;: 10, &#39;b&#39;: 20}) will not</span>
+<span class="go">produce a cache key because the ``cache_ok`` flag is not set to True.</span>
+<span class="go">Set this flag to True if this type object&#39;s state is safe to use</span>
+<span class="go">in a cache key, or False to disable this warning.</span>
+<span class="go">symbol(&#39;no_cache&#39;)</span>
+</pre></div>
+</div>
+<p>If we <strong>did</strong> set up such a cache key, it wouldn’t be usable. We would
+get a tuple structure that contains a dictionary inside of it, which
+cannot itself be used as a key in a “cache dictionary” such as SQLAlchemy’s
+statement cache, since Python dictionaries aren’t hashable:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1"># set cache_ok = True</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">type_</span><span class="o">.</span><span class="n">cache_ok</span> <span class="o">=</span> <span class="kc">True</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># this is the cache key it would generate</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">key</span> <span class="o">=</span> <span class="n">type_</span><span class="o">.</span><span class="n">_static_cache_key</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">key</span>
+<span class="go">(&lt;class &#39;__main__.LookupType&#39;&gt;, (&#39;lookup&#39;, {&#39;a&#39;: 10, &#39;b&#39;: 20}))</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># however this key is not hashable, will fail when used with</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># SQLAlchemy statement cache</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">some_cache</span> <span class="o">=</span> <span class="p">{</span><span class="n">key</span><span class="p">:</span> <span class="s2">&quot;some sql value&quot;</span><span class="p">}</span>
+<span class="x">Traceback (most recent call last): File &quot;&lt;stdin&gt;&quot;, line 1,</span>
+<span class="x">in &lt;module&gt; TypeError: unhashable type: &#39;dict&#39;</span>
+</pre></div>
+</div>
+<p>The type may be made cacheable by assigning a sorted tuple of tuples
+to the “.lookup” attribute:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">LookupType</span><span class="p">(</span><span class="n">UserDefinedType</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39;a custom type that accepts a dictionary as a parameter.</span>
+
+<span class="sd">    The dictionary is stored both as itself in a private variable,</span>
+<span class="sd">    and published in a public variable as a sorted tuple of tuples,</span>
+<span class="sd">    which is hashable and will also return the same value for any</span>
+<span class="sd">    two equivalent dictionaries.  Note it assumes the keys and</span>
+<span class="sd">    values of the dictionary are themselves hashable.</span>
+
+<span class="sd">    &#39;&#39;&#39;</span>
+
+    <span class="n">cache_ok</span> <span class="o">=</span> <span class="kc">True</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">lookup</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_lookup</span> <span class="o">=</span> <span class="n">lookup</span>
+
+        <span class="c1"># assume keys/values of &quot;lookup&quot; are hashable; otherwise</span>
+        <span class="c1"># they would also need to be converted in some way here</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">lookup</span> <span class="o">=</span> <span class="nb">tuple</span><span class="p">(</span>
+            <span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">lookup</span><span class="p">[</span><span class="n">key</span><span class="p">])</span> <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">lookup</span><span class="p">)</span>
+        <span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">get_col_spec</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kw</span><span class="p">):</span>
+        <span class="k">return</span> <span class="s2">&quot;VARCHAR(255)&quot;</span>
+
+    <span class="k">def</span> <span class="nf">bind_processor</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">dialect</span><span class="p">):</span>
+        <span class="c1"># ...  works with &quot;self._lookup&quot; ...</span>
+</pre></div>
+</div>
+<p>Where above, the cache key for <code class="docutils literal notranslate"><span class="pre">LookupType({&quot;a&quot;:</span> <span class="pre">10,</span> <span class="pre">&quot;b&quot;:</span> <span class="pre">20})</span></code> will be:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">LookupType</span><span class="p">({</span><span class="s2">&quot;a&quot;</span><span class="p">:</span> <span class="mi">10</span><span class="p">,</span> <span class="s2">&quot;b&quot;</span><span class="p">:</span> <span class="mi">20</span><span class="p">})</span><span class="o">.</span><span class="n">_static_cache_key</span>
+<span class="go">(&lt;class &#39;__main__.LookupType&#39;&gt;, (&#39;lookup&#39;, ((&#39;a&#39;, 10), (&#39;b&#39;, 20))))</span>
+</pre></div>
+</div>
+<div class="versionadded">
+<p><span class="versionmodified added">New in version 1.4.14: </span>- added the <code class="docutils literal notranslate"><span class="pre">cache_ok</span></code> flag to allow
+some configurability of caching for <code class="xref py py-class docutils literal notranslate"><span class="pre">TypeDecorator</span></code> classes.</p>
+</div>
+<div class="versionadded">
+<p><span class="versionmodified added">New in version 1.4.28: </span>- added the <code class="xref py py-class docutils literal notranslate"><span class="pre">ExternalType</span></code> mixin which
+generalizes the <code class="docutils literal notranslate"><span class="pre">cache_ok</span></code> flag to both the <code class="xref py py-class docutils literal notranslate"><span class="pre">TypeDecorator</span></code>
+and <code class="xref py py-class docutils literal notranslate"><span class="pre">UserDefinedType</span></code> classes.</p>
+</div>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p><span class="xref std std-ref">sql_caching</span></p>
+</div>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="nldi_crawler.ingestor.StrippedString.impl">
+<span class="sig-name descname"><span class="pre">impl</span></span><a class="headerlink" href="#nldi_crawler.ingestor.StrippedString.impl" title="Permalink to this definition"></a></dt>
+<dd><p>alias of <code class="xref py py-class docutils literal notranslate"><span class="pre">String</span></code></p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="nldi_crawler.ingestor.StrippedString.process_bind_param">
+<span class="sig-name descname"><span class="pre">process_bind_param</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dialect</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#nldi_crawler.ingestor.StrippedString.process_bind_param" title="Permalink to this definition"></a></dt>
+<dd><p>Receive a bound parameter value to be converted.</p>
+<p>Custom subclasses of <code class="xref py py-class docutils literal notranslate"><span class="pre">_types.TypeDecorator</span></code> should override
+this method to provide custom behaviors for incoming data values.
+This method is called at <strong>statement execution time</strong> and is passed
+the literal Python data value which is to be associated with a bound
+parameter in the statement.</p>
+<p>The operation could be anything desired to perform custom
+behavior, such as transforming or serializing data.
+This could also be used as a hook for validating logic.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>value</strong> – Data to operate upon, of any type expected by
+this method in the subclass.  Can be <code class="docutils literal notranslate"><span class="pre">None</span></code>.</p></li>
+<li><p><strong>dialect</strong> – the <code class="xref py py-class docutils literal notranslate"><span class="pre">Dialect</span></code> in use.</p></li>
+</ul>
+</dd>
+</dl>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p><span class="xref std std-ref">types_typedecorator</span></p>
+<p><code class="xref py py-meth docutils literal notranslate"><span class="pre">_types.TypeDecorator.process_result_value()</span></code></p>
+</div>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="nldi_crawler.ingestor.create_tmp_table">
+<span class="sig-prename descclassname"><span class="pre">nldi_crawler.ingestor.</span></span><span class="sig-name descname"><span class="pre">create_tmp_table</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dal</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">src</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#nldi_crawler.ingestor.create_tmp_table" title="Permalink to this definition"></a></dt>
+<dd><p>This method of creating the temp table relies completely on the postgress dialect of SQL to
+do the work. We could use sqlalchemy mechanisms to achieve something similar, but this is
+quick and easy – and it eliminates some problems if the created table is not truly identical
+to the <cite>features</cite> table it models on. This will become important when we establish inheritance
+among tables later.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="nldi_crawler.ingestor.ingest_from_file">
+<span class="sig-prename descclassname"><span class="pre">nldi_crawler.ingestor.</span></span><span class="sig-name descname"><span class="pre">ingest_from_file</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">src</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fname</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dal</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#nldi_crawler.ingestor.ingest_from_file" title="Permalink to this definition"></a></dt>
+<dd><p>Takes in a source dataset, and processes it to insert into the NLDI-DB feature table</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>src</strong> (<a class="reference internal" href="#nldi_crawler.source.CrawlerSource" title="nldi_crawler.source.CrawlerSource"><em>CrawlerSource</em></a><em>(</em><em>)</em>) – The source to be ingested</p></li>
+<li><p><strong>fname</strong> (<em>str</em>) – The name of the local copy of the dataset.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="nldi_crawler.ingestor.install_data">
+<span class="sig-prename descclassname"><span class="pre">nldi_crawler.ingestor.</span></span><span class="sig-name descname"><span class="pre">install_data</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dal</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">src</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#nldi_crawler.ingestor.install_data" title="Permalink to this definition"></a></dt>
+<dd><p>To ‘install’ the ingested data, we will manipulate table names and inheritance.</p>
+<p>The data design has the various sources (named ‘feature_{suffix}’) INHERIT from
+the <cite>feature</cite> parent table. Queries against <cite>feature</cite> will return rows from any
+child that inherits from it.</p>
+<p>The workflow here is to take the already-populated feature_{suffix}_tmp table
+and shuffle the table names:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>remove feature_{suffix}_old</p></li>
+<li><p>Remove inheritance relationship between feature and feature_{suffix}</p></li>
+<li><p>rename feature_{suffix} to feature_{suffix}_old</p></li>
+<li><p>rename feature_{suffix}_tmp to feature_{suffix}</p></li>
+<li><p>re-establish inheritance between feature and feature_{suffix}</p></li>
+<li><p>remove the feature_{suffix}_old table</p></li>
+</ul>
+</div></blockquote>
+</dd></dl>
+
+<span class="target" id="module-nldi_crawler.cli"></span><p>Command Line Interface for launching the NLDI web crawler.</p>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="source_table.html" class="btn btn-neutral float-left" title="Sources Table" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, USGS.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

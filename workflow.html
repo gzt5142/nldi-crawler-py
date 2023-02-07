@@ -21,7 +21,9 @@
         <script>mermaid.initialize({startOnLoad:true});</script>
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
-    <link rel="search" title="Search" href="search.html" /> 
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Sources Table" href="source_table.html" />
+    <link rel="prev" title="Usage Examples" href="usage.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -39,15 +41,20 @@
   </form>
 </div>
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
-              <!-- Local TOC -->
-              <div class="local-toc"><ul>
-<li><a class="reference internal" href="#">Workflow</a><ul>
-<li><a class="reference internal" href="#sequence-diagram">Sequence Diagram</a></li>
-<li><a class="reference internal" href="#annotations">Annotations</a></li>
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="LICENSE.html">LICENSE</a></li>
+<li class="toctree-l1"><a class="reference internal" href="CODE_OF_CONDUCT.html">Code of Conduct</a></li>
+<li class="toctree-l1"><a class="reference internal" href="CONTRIBUTING.html">Contributing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="usage.html">Usage Examples</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Workflow</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#sequence-diagram">Sequence Diagram</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#annotations">Annotations</a></li>
 </ul>
 </li>
+<li class="toctree-l1"><a class="reference internal" href="source_table.html">Sources Table</a></li>
+<li class="toctree-l1"><a class="reference internal" href="reference.html">Function Reference</a></li>
 </ul>
-</div>
+
         </div>
       </div>
     </nav>
@@ -64,7 +71,7 @@
       <li><a href="index.html" class="icon icon-home"></a></li>
       <li class="breadcrumb-item active">Workflow</li>
       <li class="wy-breadcrumbs-aside">
-            <a href="_sources/workflow.md.txt" rel="nofollow"> View page source</a>
+            <a href="_sources/workflow.rst.txt" rel="nofollow"> View page source</a>
       </li>
   </ul>
   <hr/>
@@ -77,7 +84,8 @@
 <p>The crawler CLI will bulk-download feature data from pre-defined sources. The sequence is a follows:</p>
 <section id="sequence-diagram">
 <h2>Sequence Diagram<a class="headerlink" href="#sequence-diagram" title="Permalink to this heading"></a></h2>
-<div class="highlight-mermaid notranslate"><div class="highlight"><pre><span></span>%%{init: {
+<div class="mermaid">
+            %%{init: {
     &quot;theme&quot;: &quot;default&quot;,
     &quot;mid-width&quot;: 2500,
     &quot;max-width&quot;: 5000,
@@ -103,23 +111,18 @@ sequenceDiagram
     Crawler-&gt;&gt;NLDI-DB: Relate Features
 
     %NLDI-DB--&gt;&gt;-Crawler: Success
-</pre></div>
-</div>
-</section>
+        </div></section>
 <section id="annotations">
 <h2>Annotations<a class="headerlink" href="#annotations" title="Permalink to this heading"></a></h2>
 <ol class="arabic simple">
 <li><p>Launch CLI tool</p></li>
 <li><p>Connect to NLDI master database, requesting the list of configured feature sources.</p></li>
-<li><p>Returns a list of feature sources.  The crawler can either:</p>
-<ul class="simple">
-<li><p>list all sources and exit</p></li>
-<li><p>Proceed to ‘crawl’ one of the sources in the table</p></li>
-</ul>
-</li>
-<li><p>For the identified feature source, make a GET request via HTTP.  The URI is taken from the <code class="docutils literal notranslate"><span class="pre">crawler_sources</span></code> table.</p></li>
+<li><p>Returns a list of feature sources.  The crawler can either:
+* list all sources and exit
+* Proceed to ‘crawl’ one of the sources in the table</p></li>
+<li><p>For the identified feature source, make a GET request via HTTP.  The URI is taken from the <cite>crawler_sources</cite> table.</p></li>
 <li><p>The feature source returns GeoJSON.  Among the returned data is a list of ‘features’.</p></li>
-<li><p><strong>[Per-Feature]</strong> Use the ORM to map the feature data to the schema reflected from the <code class="docutils literal notranslate"><span class="pre">features</span></code> table</p></li>
+<li><p><strong>[Per-Feature]</strong> Use the ORM to map the feature data to the schema reflected from the <cite>features</cite> table</p></li>
 <li><p><strong>[Per-Feature]</strong> Insert the new feature to the master NLDI database</p></li>
 <li><p>“Relate” features – build the relationships matching features to their adjacent features in the NLDI topology.</p></li>
 </ol>
@@ -129,7 +132,10 @@ sequenceDiagram
 
            </div>
           </div>
-          <footer>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="usage.html" class="btn btn-neutral float-left" title="Usage Examples" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="source_table.html" class="btn btn-neutral float-right" title="Sources Table" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
 
   <hr/>
 

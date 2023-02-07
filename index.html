@@ -22,7 +22,7 @@
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Sources Table" href="source_table.html" /> 
+    <link rel="next" title="LICENSE" href="LICENSE.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -41,9 +41,13 @@
 </div>
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
               <ul>
-<li class="toctree-l1"><a class="reference internal" href="source_table.html">Sources Table</a></li>
-<li class="toctree-l1"><a class="reference internal" href="workflow.html">Workflow</a></li>
+<li class="toctree-l1"><a class="reference internal" href="LICENSE.html">LICENSE</a></li>
+<li class="toctree-l1"><a class="reference internal" href="CODE_OF_CONDUCT.html">Code of Conduct</a></li>
+<li class="toctree-l1"><a class="reference internal" href="CONTRIBUTING.html">Contributing</a></li>
 <li class="toctree-l1"><a class="reference internal" href="usage.html">Usage Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="workflow.html">Workflow</a></li>
+<li class="toctree-l1"><a class="reference internal" href="source_table.html">Sources Table</a></li>
+<li class="toctree-l1"><a class="reference internal" href="reference.html">Function Reference</a></li>
 </ul>
 
         </div>
@@ -74,15 +78,9 @@
 <h1>NLDI Crawler<a class="headerlink" href="#nldi-crawler" title="Permalink to this heading"></a></h1>
 <div class="toctree-wrapper compound">
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="source_table.html">Sources Table</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="source_table.html#example">Example</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="workflow.html">Workflow</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="workflow.html#sequence-diagram">Sequence Diagram</a></li>
-<li class="toctree-l2"><a class="reference internal" href="workflow.html#annotations">Annotations</a></li>
-</ul>
-</li>
+<li class="toctree-l1"><a class="reference internal" href="LICENSE.html">LICENSE</a></li>
+<li class="toctree-l1"><a class="reference internal" href="CODE_OF_CONDUCT.html">Code of Conduct</a></li>
+<li class="toctree-l1"><a class="reference internal" href="CONTRIBUTING.html">Contributing</a></li>
 <li class="toctree-l1"><a class="reference internal" href="usage.html">Usage Examples</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="usage.html#config-option-1">CONFIG Option 1</a></li>
 <li class="toctree-l2"><a class="reference internal" href="usage.html#config-option-2">CONFIG Option #2</a></li>
@@ -90,6 +88,41 @@
 <li class="toctree-l2"><a class="reference internal" href="usage.html#validate-a-source">Validate a Source</a></li>
 <li class="toctree-l2"><a class="reference internal" href="usage.html#download-source-data-to-local-disk">Download Source Data to Local Disk</a></li>
 <li class="toctree-l2"><a class="reference internal" href="usage.html#ingesting-source-data">Ingesting Source Data</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="workflow.html">Workflow</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="workflow.html#sequence-diagram">Sequence Diagram</a></li>
+<li class="toctree-l2"><a class="reference internal" href="workflow.html#annotations">Annotations</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="source_table.html">Sources Table</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="source_table.html#example">Example</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="reference.html">Function Reference</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="reference.html#nldi_crawler.source.CrawlerSource"><code class="docutils literal notranslate"><span class="pre">CrawlerSource</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="reference.html#nldi_crawler.source.CrawlerSource.table_name"><code class="docutils literal notranslate"><span class="pre">CrawlerSource.table_name()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="reference.html#nldi_crawler.source.download_geojson"><code class="docutils literal notranslate"><span class="pre">download_geojson()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="reference.html#nldi_crawler.source.list_sources"><code class="docutils literal notranslate"><span class="pre">list_sources()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="reference.html#nldi_crawler.source.validate_src"><code class="docutils literal notranslate"><span class="pre">validate_src()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="reference.html#nldi_crawler.db.DataAccessLayer"><code class="docutils literal notranslate"><span class="pre">DataAccessLayer</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="reference.html#nldi_crawler.db.DataAccessLayer.Session"><code class="docutils literal notranslate"><span class="pre">DataAccessLayer.Session()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="reference.html#nldi_crawler.db.DataAccessLayer.connect"><code class="docutils literal notranslate"><span class="pre">DataAccessLayer.connect()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="reference.html#nldi_crawler.db.DataAccessLayer.disconnect"><code class="docutils literal notranslate"><span class="pre">DataAccessLayer.disconnect()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="reference.html#nldi_crawler.db.NLDI_Base"><code class="docutils literal notranslate"><span class="pre">NLDI_Base</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="reference.html#nldi_crawler.ingestor.StrippedString"><code class="docutils literal notranslate"><span class="pre">StrippedString</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="reference.html#nldi_crawler.ingestor.StrippedString.cache_ok"><code class="docutils literal notranslate"><span class="pre">StrippedString.cache_ok</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="reference.html#nldi_crawler.ingestor.StrippedString.impl"><code class="docutils literal notranslate"><span class="pre">StrippedString.impl</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="reference.html#nldi_crawler.ingestor.StrippedString.process_bind_param"><code class="docutils literal notranslate"><span class="pre">StrippedString.process_bind_param()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="reference.html#nldi_crawler.ingestor.create_tmp_table"><code class="docutils literal notranslate"><span class="pre">create_tmp_table()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="reference.html#nldi_crawler.ingestor.ingest_from_file"><code class="docutils literal notranslate"><span class="pre">ingest_from_file()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="reference.html#nldi_crawler.ingestor.install_data"><code class="docutils literal notranslate"><span class="pre">install_data()</span></code></a></li>
 </ul>
 </li>
 </ul>
@@ -100,7 +133,7 @@
            </div>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="source_table.html" class="btn btn-neutral float-right" title="Sources Table" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="LICENSE.html" class="btn btn-neutral float-right" title="LICENSE" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>
