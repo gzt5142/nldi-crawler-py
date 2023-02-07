@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sources Table &mdash; NLDI Crawler  documentation</title>
+      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="_static/doctools.js"></script>
+        <script src="_static/sphinx_highlight.js"></script>
+        <script src="https://unpkg.com/mermaid/dist/mermaid.min.js"></script>
+        <script>mermaid.initialize({startOnLoad:true});</script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="index.html" class="icon icon-home"> NLDI Crawler
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <!-- Local TOC -->
+              <div class="local-toc"><ul>
+<li><a class="reference internal" href="#">Sources Table</a><ul>
+<li><a class="reference internal" href="#example">Example</a></li>
+</ul>
+</li>
+</ul>
+</div>
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">NLDI Crawler</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home"></a></li>
+      <li class="breadcrumb-item active">Sources Table</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/source_table.md.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="sources-table">
+<h1>Sources Table<a class="headerlink" href="#sources-table" title="Permalink to this heading"></a></h1>
+<p>Annotations for the <code class="docutils literal notranslate"><span class="pre">crawler_source</span></code> table, which holds information for finding and processing feature sources:</p>
+<table class="colwidths-auto docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Type</p></th>
+<th class="head"><p>Column Name</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>integer</p></td>
+<td><p>crawler_source_id</p></td>
+<td><p>The unique identifier to differentiate sources in this table.</p></td>
+</tr>
+<tr class="row-odd"><td><p>string</p></td>
+<td><p>source_name</p></td>
+<td><p>A human-readable, friendly discriptor for the data source</p></td>
+</tr>
+<tr class="row-even"><td><p>string</p></td>
+<td><p>source_suffix</p></td>
+<td><p>This string is used to build table names internally. It should be a unique string with no special characters</p></td>
+</tr>
+<tr class="row-odd"><td><p>string</p></td>
+<td><p>source_uri</p></td>
+<td><p>The web address from which feature data is retrieved.</p></td>
+</tr>
+<tr class="row-even"><td><p>string</p></td>
+<td><p>feature_id</p></td>
+<td><p>The returned GeoJSON from <code class="docutils literal notranslate"><span class="pre">source_uri</span></code> includes feature properties/attributes. This field identifies the name of the property which uniquely identifies the feature within the feature collection. This is treated as the <code class="docutils literal notranslate"><span class="pre">KEY</span></code> within the feature collection</p></td>
+</tr>
+<tr class="row-odd"><td><p>string</p></td>
+<td><p>feature_name</p></td>
+<td><p>The property name within the returned GeoJSON which holds the name of the feature.</p></td>
+</tr>
+<tr class="row-even"><td><p>string</p></td>
+<td><p>feature_uri</p></td>
+<td><p>the property name within the returned GeoJSON which holds the URL by which a feature can be accessed directly.</p></td>
+</tr>
+<tr class="row-odd"><td><p>string</p></td>
+<td><p>feature_reach</p></td>
+<td><p>The property name within the returned GeoJSON which holds the reach identifier</p></td>
+</tr>
+<tr class="row-even"><td><p>string</p></td>
+<td><p>feature_measure</p></td>
+<td><p>The property name within the returned GeoJSON which holds the M-value along the <code class="docutils literal notranslate"><span class="pre">feature_reach</span></code> where this feature can be found</p></td>
+</tr>
+<tr class="row-odd"><td><p>string</p></td>
+<td><p>ingest_type</p></td>
+<td><p>The type of feature to be parsed.  This string should be one of [ <code class="docutils literal notranslate"><span class="pre">reach</span></code> , <code class="docutils literal notranslate"><span class="pre">point</span></code> ]</p></td>
+</tr>
+<tr class="row-even"><td><p>string</p></td>
+<td><p>feature_type</p></td>
+<td><p>Unknown.  This string is one of [ <code class="docutils literal notranslate"><span class="pre">hydrolocation</span></code> , <code class="docutils literal notranslate"><span class="pre">point</span></code> , <code class="docutils literal notranslate"><span class="pre">varies</span></code> ]</p></td>
+</tr>
+</tbody>
+</table>
+<section id="example">
+<h2>Example<a class="headerlink" href="#example" title="Permalink to this heading"></a></h2>
+<div class="highlight-sql notranslate"><div class="highlight"><pre><span></span><span class="k">SELECT</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">from</span><span class="w"> </span><span class="n">nldi_data</span><span class="p">.</span><span class="n">crawler_source</span><span class="w"> </span><span class="k">where</span><span class="w"> </span><span class="n">crawler_source_id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">10</span><span class="w"></span>
+</pre></div>
+</div>
+<p>|Source number <code class="docutils literal notranslate"><span class="pre">10</span></code> contains the following data:</p>
+<table class="colwidths-auto docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Column</p></th>
+<th class="head"><p>Value</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>crawler_source_id</p></td>
+<td><p>10</p></td>
+</tr>
+<tr class="row-odd"><td><p>source_name</p></td>
+<td><p>Vigil Network Data</p></td>
+</tr>
+<tr class="row-even"><td><p>source_suffix</p></td>
+<td><p>vigil</p></td>
+</tr>
+<tr class="row-odd"><td><p>source_uri</p></td>
+<td><p>https://www.sciencebase.gov/catalog/file/get/60c7b895d34e86b9389b2a6c?name=vigil.geojson</p></td>
+</tr>
+<tr class="row-even"><td><p>feature_id</p></td>
+<td><p>SBID</p></td>
+</tr>
+<tr class="row-odd"><td><p>feature_name</p></td>
+<td><p>Site Name</p></td>
+</tr>
+<tr class="row-even"><td><p>feature_uri</p></td>
+<td><p>SBURL</p></td>
+</tr>
+<tr class="row-odd"><td><p>feature_reach</p></td>
+<td><p>REACHCODE</p></td>
+</tr>
+<tr class="row-even"><td><p>feature_measure</p></td>
+<td><p>REACH_measure</p></td>
+</tr>
+<tr class="row-odd"><td><p>ingest_type</p></td>
+<td><p>reach</p></td>
+</tr>
+<tr class="row-even"><td><p>feature_type</p></td>
+<td><p>hydrolocation</p></td>
+</tr>
+</tbody>
+</table>
+<p>If we fetch the GeoJSON for this source, we see that the feature table looks like this:</p>
+<table class="colwidths-auto docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>SBID</p></th>
+<th class="head"><p>Site Name</p></th>
+<th class="head"><p>SBURL</p></th>
+<th class="head"><p>REACHCODE</p></th>
+<th class="head"><p>REACH_measure</p></th>
+<th class="head"><p>Location</p></th>
+<th class="head"><p>geometry</p></th>
+<th class="head"><p>…</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>5fe395bbd34ea5387deb4950</p></td>
+<td><p>Aching Shoulder Slope, New Mexico, USA</p></td>
+<td><p>https://www.sciencebase.gov/catalog/item/5fe395bbd34ea5387deb4950</p></td>
+<td><p>null</p></td>
+<td><p>null</p></td>
+<td><p>Mitten Rock, New Mexico USA</p></td>
+<td><p>Point()</p></td>
+<td><p>…</p></td>
+</tr>
+<tr class="row-odd"><td><p>5fe39807d34ea5387deb4970</p></td>
+<td><p>Armells Creek, Montana, USA</p></td>
+<td><p>https://www.sciencebase.gov/catalog/item/5fe39807d34ea5387deb4970</p></td>
+<td><p>10100001000709</p></td>
+<td><p>90.193048735368549</p></td>
+<td><p>Yellowstone River Basin, Southeastern Montana, USA</p></td>
+<td><p>Point()</p></td>
+<td><p>…</p></td>
+</tr>
+<tr class="row-even"><td><p>…</p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p>…</p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+</tr>
+</tbody>
+</table>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, USGS.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

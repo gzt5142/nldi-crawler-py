@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Workflow &mdash; NLDI Crawler  documentation</title>
+      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="_static/doctools.js"></script>
+        <script src="_static/sphinx_highlight.js"></script>
+        <script src="https://unpkg.com/mermaid/dist/mermaid.min.js"></script>
+        <script>mermaid.initialize({startOnLoad:true});</script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="index.html" class="icon icon-home"> NLDI Crawler
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <!-- Local TOC -->
+              <div class="local-toc"><ul>
+<li><a class="reference internal" href="#">Workflow</a><ul>
+<li><a class="reference internal" href="#sequence-diagram">Sequence Diagram</a></li>
+<li><a class="reference internal" href="#annotations">Annotations</a></li>
+</ul>
+</li>
+</ul>
+</div>
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">NLDI Crawler</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home"></a></li>
+      <li class="breadcrumb-item active">Workflow</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/workflow.md.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="workflow">
+<h1>Workflow<a class="headerlink" href="#workflow" title="Permalink to this heading"></a></h1>
+<p>The crawler CLI will bulk-download feature data from pre-defined sources. The sequence is a follows:</p>
+<section id="sequence-diagram">
+<h2>Sequence Diagram<a class="headerlink" href="#sequence-diagram" title="Permalink to this heading"></a></h2>
+<div class="highlight-mermaid notranslate"><div class="highlight"><pre><span></span>%%{init: {
+    &quot;theme&quot;: &quot;default&quot;,
+    &quot;mid-width&quot;: 2500,
+    &quot;max-width&quot;: 5000,
+    &quot;sequence&quot;: {&quot;showSequenceNumbers&quot;: true }
+    }
+}%%
+sequenceDiagram
+    actor CLI
+    CLI-&gt;&gt;Crawler: launch
+    Crawler-&gt;&gt;+NLDI-DB: Get Source Information
+    Note left of NLDI-DB: SELECT * FROM nldi_data.crawler_source
+    NLDI-DB--&gt;&gt;-Crawler: Sources table
+
+    Crawler-&gt;&gt;+FeatureSource: Request Features
+    Note left of FeatureSource: HTTP GET ${crawler_source.source_uri}
+    FeatureSource--&gt;&gt;-Crawler: GeoJSON FeatureCollection
+    loop foreach feature in Collection
+        Crawler--&gt;&gt;+Crawler: ORM
+        Note right of Crawler: Parses and maps feature to SQL
+        Crawler-&gt;&gt;-NLDI-DB: Add to feature table
+        Note left of NLDI-DB: INSERT INTO nldi_data.features
+    end
+    Crawler-&gt;&gt;NLDI-DB: Relate Features
+
+    %NLDI-DB--&gt;&gt;-Crawler: Success
+</pre></div>
+</div>
+</section>
+<section id="annotations">
+<h2>Annotations<a class="headerlink" href="#annotations" title="Permalink to this heading"></a></h2>
+<ol class="arabic simple">
+<li><p>Launch CLI tool</p></li>
+<li><p>Connect to NLDI master database, requesting the list of configured feature sources.</p></li>
+<li><p>Returns a list of feature sources.  The crawler can either:</p>
+<ul class="simple">
+<li><p>list all sources and exit</p></li>
+<li><p>Proceed to ‘crawl’ one of the sources in the table</p></li>
+</ul>
+</li>
+<li><p>For the identified feature source, make a GET request via HTTP.  The URI is taken from the <code class="docutils literal notranslate"><span class="pre">crawler_sources</span></code> table.</p></li>
+<li><p>The feature source returns GeoJSON.  Among the returned data is a list of ‘features’.</p></li>
+<li><p><strong>[Per-Feature]</strong> Use the ORM to map the feature data to the schema reflected from the <code class="docutils literal notranslate"><span class="pre">features</span></code> table</p></li>
+<li><p><strong>[Per-Feature]</strong> Insert the new feature to the master NLDI database</p></li>
+<li><p>“Relate” features – build the relationships matching features to their adjacent features in the NLDI topology.</p></li>
+</ol>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, USGS.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

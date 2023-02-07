@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Usage Examples &mdash; NLDI Crawler  documentation</title>
+      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="_static/doctools.js"></script>
+        <script src="_static/sphinx_highlight.js"></script>
+        <script src="https://unpkg.com/mermaid/dist/mermaid.min.js"></script>
+        <script>mermaid.initialize({startOnLoad:true});</script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="prev" title="Workflow" href="workflow.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="index.html" class="icon icon-home"> NLDI Crawler
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="source_table.html">Sources Table</a></li>
+<li class="toctree-l1"><a class="reference internal" href="workflow.html">Workflow</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Usage Examples</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#config-option-1">CONFIG Option 1</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#config-option-2">CONFIG Option #2</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#display-a-source">Display a Source</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#validate-a-source">Validate a Source</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#download-source-data-to-local-disk">Download Source Data to Local Disk</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#ingesting-source-data">Ingesting Source Data</a></li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">NLDI Crawler</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home"></a></li>
+      <li class="breadcrumb-item active">Usage Examples</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/usage.md.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="usage-examples">
+<h1>Usage Examples<a class="headerlink" href="#usage-examples" title="Permalink to this heading"></a></h1>
+<p>Launch the tool with no arguments to get a help message.  You get the same thing if you launce with <code class="docutils literal notranslate"><span class="pre">--help</span></code> option.</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span># nldi-cli
+
+You must supply a COMMAND: [&#39;display&#39;, &#39;download&#39;, &#39;ingest&#39;, &#39;sources&#39;, &#39;validate&#39;]
+
+Usage: nldi-cli [OPTIONS] COMMAND [ARGS]...
+
+  CLI to launch NLDI crawler.
+
+Options:
+  -v             Verbose mode.
+  --config PATH  Location of config file.
+  --help         Show this message and exit.
+
+Commands:
+  display   Show details for named source.
+  download  Download the data associated with a named data source.
+  ingest    Download and process data associated with a named data source.
+  sources   List all available crawler sources and exit.
+  validate  Connect to data source(s) to verify that they can supply data...
+</pre></div>
+</div>
+<p>Note that you can specify <code class="docutils literal notranslate"><span class="pre">-v</span></code> to go into verbose mode.  Using <code class="docutils literal notranslate"><span class="pre">-vv</span></code> will be extra verbose.</p>
+<p>The tool connects to a database for all source data.  The details of that database connection can
+be configured in two ways:  by setting environment variables, or by supplying a config file.</p>
+<section id="config-option-1">
+<h2>CONFIG Option 1<a class="headerlink" href="#config-option-1" title="Permalink to this heading"></a></h2>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span># export NLDI_DB_HOST=172.18.0.1
+# export NLDI_DB_PORT=5432
+# export NLDI_DB_USER=username
+# export NLDI_DB_PASS=secret
+# export NLDI_DB_NAME=nldi
+#
+# nldi-cli sources
+
+ID : Source Name                                    : Type  : URI
+==   ==============================================   =====   ================================================
+ 1 : Water Quality Portal                           : POINT : https://www.waterqualitydata.us/data/Station/sea...
+ 2 : HUC12 Pour Points                              : POINT : https://www.sciencebase.gov/catalogMaps/mapping/...
+ 5 : NWIS Surface Water Sites                       : REACH : https://www.sciencebase.gov/catalog/file/get/60c...
+ 6 : Water Data Exchange 2.0 Sites                  : POINT : https://www.hydroshare.org/resource/5f665b7b82d7...
+ 7 : geoconnex.us reference gages                   : REACH : https://www.hydroshare.org/resource/3295a17b4cc2...
+ 8 : Streamgage catalog for CA SB19                 : REACH : https://sb19.linked-data.internetofwater.dev/col...
+ 9 : USGS Geospatial Fabric V1.1 Points of Interest : REACH : https://www.sciencebase.gov/catalogMaps/mapping/...
+10 : Vigil Network Data                             : REACH : https://www.sciencebase.gov/catalog/file/get/60c...
+11 : NWIS Groundwater Sites                         : POINT : https://www.sciencebase.gov/catalog/file/get/60c...
+12 : New Mexico Water Data Initative Sites          : POINT : https://locations.newmexicowaterdata.org/collect...
+13 : geoconnex contribution demo sites              : REACH : https://geoconnex-demo-pages.internetofwater.dev...
+</pre></div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">sources</span></code> sub-command to the CLI tool will list all of the data sources configured in the database specified
+using the <code class="docutils literal notranslate"><span class="pre">NNDI_DB_</span></code> environment variables.</p>
+</section>
+<section id="config-option-2">
+<h2>CONFIG Option #2<a class="headerlink" href="#config-option-2" title="Permalink to this heading"></a></h2>
+<p>You can also specify connection parameters by pointing the tool to a <code class="docutils literal notranslate"><span class="pre">toml</span></code> file.  The contents of that file
+should look like this:</p>
+<div class="highlight-toml notranslate"><div class="highlight"><pre><span></span><span class="k">[nldi-db]</span><span class="w"></span>
+<span class="n">hostname</span><span class="p">:</span><span class="w"> </span><span class="mf">172.18.0.1</span><span class="w"></span>
+<span class="n">port</span><span class="p">:</span><span class="w"> </span><span class="mi">5432</span><span class="w"></span>
+<span class="n">username</span><span class="p">:</span><span class="w"> </span><span class="n">username</span><span class="w"></span>
+<span class="n">password</span><span class="p">:</span><span class="w"> </span><span class="n">secret</span><span class="w"></span>
+<span class="n">db_name</span><span class="p">:</span><span class="w"> </span><span class="n">nldi</span><span class="w"></span>
+</pre></div>
+</div>
+<p>Use this option with the <code class="docutils literal notranslate"><span class="pre">--config</span></code> switch on the CLI tool:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span># nldi-cli -vv --config ./crawler.toml sources
+INFO:root:VERBOSE is 2
+INFO:root: Consulting environment variables for DB connection info...
+INFO:root: Parsing TOML config file ./nldi-crawler.toml for DB connection info...
+WARNING:root:Password stored as plain text in crawler.toml. Consider passing as env variable instead.
+INFO:root: Using DB connection URI: postgresql://username:****@172.18.0.1:5432/nldi
+
+ID : Source Name                                    : Type  : URI
+==   ==============================================   =====   ================================================
+ 1 : Water Quality Portal                           : POINT : https://www.waterqualitydata.us/data/Station/sea...
+ 2 : HUC12 Pour Points                              : POINT : https://www.sciencebase.gov/catalogMaps/mapping/...
+ 5 : NWIS Surface Water Sites                       : REACH : https://www.sciencebase.gov/catalog/file/get/60c...
+ 6 : Water Data Exchange 2.0 Sites                  : POINT : https://www.hydroshare.org/resource/5f665b7b82d7...
+ 7 : geoconnex.us reference gages                   : REACH : https://www.hydroshare.org/resource/3295a17b4cc2...
+ 8 : Streamgage catalog for CA SB19                 : REACH : https://sb19.linked-data.internetofwater.dev/col...
+ 9 : USGS Geospatial Fabric V1.1 Points of Interest : REACH : https://www.sciencebase.gov/catalogMaps/mapping/...
+10 : Vigil Network Data                             : REACH : https://www.sciencebase.gov/catalog/file/get/60c...
+11 : NWIS Groundwater Sites                         : POINT : https://www.sciencebase.gov/catalog/file/get/60c...
+12 : New Mexico Water Data Initative Sites          : POINT : https://locations.newmexicowaterdata.org/collect...
+13 : geoconnex contribution demo sites              : REACH : https://geoconnex-demo-pages.internetofwater.dev...
+</pre></div>
+</div>
+<p>Note the additional output due to the verbose flags being set.</p>
+</section>
+<section id="display-a-source">
+<h2>Display a Source<a class="headerlink" href="#display-a-source" title="Permalink to this heading"></a></h2>
+<p>We can get detailed information about a specific source with the <code class="docutils literal notranslate"><span class="pre">display</span></code> sub-command.  For future examples,
+assume the environment has been set to the correct database connection settings.</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span># nldi-cli display 10
+10 :: Vigil Network Data
+  Source Suffix:  vigil
+  Source URI:     https://www.sciencebase.gov/catalog/file/get/60c7b895d34e86b9389b2a6c?name=vigil.geojson
+  Feature ID:     SBID
+  Feature Name:   Site Name
+  Feature URI:    SBURL
+  Feature Reach:  nhdpv2_REACHCODE
+  Feature Measure:nhdpv2_REACH_measure
+  Ingest Type:    reach
+  Feature Type    hydrolocation
+</pre></div>
+</div>
+</section>
+<section id="validate-a-source">
+<h2>Validate a Source<a class="headerlink" href="#validate-a-source" title="Permalink to this heading"></a></h2>
+<p>This will attempt to connect to the URI of the source, and parse its output to see that it is valid JSON and
+matches the metadata that the source table expects.</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span># nldi-cli validate 10
+Checking Vigil Network Data...  [FAIL] : Column not found for &#39;feature_reach&#39; : nhdpv2_REACHCODE
+
+# nldi-cli validate 1
+Checking Water Quality Portal...  [FAIL] : Network Timeout
+
+# nldi-cli validate 13
+Checking geoconnex contribution demo sites...  [PASS]
+</pre></div>
+</div>
+<p>You can also validate all sources at once, by not specifying a specific source:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span># nldi-cli -v  validate
+INFO:root: VERBOSE is 1
+INFO:root: Consulting environment variables for DB connection info...
+INFO:root: Parsing TOML config file ./nldi-crawler.toml for DB connection info...
+INFO:root: Using DB connection URI: postgresql://username:****@172.18.0.1:5432/nldi
+INFO:root:Validating data source(s)
+1 : Checking Water Quality Portal...  [FAIL] : Network Timeout
+2 : Checking HUC12 Pour Points...  [FAIL] : Invalid JSON
+5 : Checking NWIS Surface Water Sites...  [PASS]
+6 : Checking Water Data Exchange 2.0 Sites...  [PASS]
+7 : Checking geoconnex.us reference gages...  [PASS]
+8 : Checking Streamgage catalog for CA SB19...  [FAIL] : Network Timeout
+9 : Checking USGS Geospatial Fabric V1.1 Points of Interest...  [PASS]
+10 : Checking Vigil Network Data...  [FAIL] : Column not found for &#39;feature_measure&#39; : nhdpv2_REACH_measure
+11 : Checking NWIS Groundwater Sites...  [PASS]
+12 : Checking New Mexico Water Data Initative Sites...  [FAIL] : Network Timeout
+13 : Checking geoconnex contribution demo sites...  [FAIL] : Column not found for &#39;feature_id&#39; : id
+</pre></div>
+</div>
+</section>
+<section id="download-source-data-to-local-disk">
+<h2>Download Source Data to Local Disk<a class="headerlink" href="#download-source-data-to-local-disk" title="Permalink to this heading"></a></h2>
+<p>This is not especially useful on its own, but can be used for debugging. Specifying a source will download
+the GeoJSON from that source to a local file.</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span># nldi-cli download 10
+Source 10 downloaded to /home/trantham/nldi-crawler-py/CrawlerData_10_w2_08yh5.geojson
+</pre></div>
+</div>
+<p>The filename is <code class="docutils literal notranslate"><span class="pre">CrawlerData_</span></code>, plus the the source number, plus a unique random string from the tempfile library, plus <code class="docutils literal notranslate"><span class="pre">.geojson</span></code>.</p>
+</section>
+<section id="ingesting-source-data">
+<h2>Ingesting Source Data<a class="headerlink" href="#ingesting-source-data" title="Permalink to this heading"></a></h2>
+<p>This is the main function of this tool.  It will download source data, then parse it for individual features,
+which it will then insert into the master features table in the nldi database.</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>&gt; nldi-cli -vv --config ./crawler.toml ingest 10
+INFO:root:VERBOSE is 2
+INFO:root: Consulting environment variables for DB connection info...
+INFO:root: Parsing TOML config file ./nldi-crawler.toml for DB connection info...
+WARNING:root:Password stored as plain text in nldi-crawler.toml. Consider passing as env variable instead.
+INFO:root: Using DB connection URI: postgresql://username:****@172.18.0.1:5432/nldi
+INFO:root: Downloading data from https://www.sciencebase.gov/catalog/file/get/60c7b895d34e86b9389b2a6c?name=vigil.geojson ...
+INFO:root:Writing to tmp file /home/trantham/nldi-crawler-py/CrawlerData_10_wbkl40e2.geojson
+INFO:root: Source 10 dowloaded to /home/trantham/nldi-crawler-py/CrawlerData_10_wbkl40e2.geojson
+INFO:root: Ingesting from REACH source: 10 / Vigil Network Data
+INFO:root: Processed 70 features from Vigil Network Data
+</pre></div>
+</div>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="workflow.html" class="btn btn-neutral float-left" title="Workflow" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, USGS.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
