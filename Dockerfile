@@ -26,6 +26,8 @@ FROM root-cert as ubuntu-base
 
 RUN mkdir -p /nldi-crawler-py
 WORKDIR /nldi-crawler-py
+
+# Running into issue with thread limits 'RuntimeError: can't start new thread'
 RUN pip install -U pip
 RUN pip install -U setuptools
 RUN pip install poetry
