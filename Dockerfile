@@ -12,7 +12,8 @@ LABEL maintainer2="Erik Wojtylko <ewojtylko@usgs.gov>"
 
 # Needs DOI Cert to work.  VPN is needed for artifactory image and cert is needed to pip install through vpn.
 COPY ./docker/DOIRootCA2.cer /usr/local/share/ca-certificates/DOIRootCA2.crt
-RUN chmod 644 /usr/local/share/ca-certificates/DOIRootCA2.crt && update-ca-certificates
+RUN chmod 644 /usr/local/share/ca-certificates/DOIRootCA2.crt
+RUN update-ca-certificates
 
 ENV PIP_CERT="/etc/ssl/certs/ca-certificates.crt" \
     SSL_CERT_FILE="/etc/ssl/certs/ca-certificates.crt" \
@@ -25,10 +26,7 @@ FROM root-cert as ubuntu-base
 
 RUN mkdir -p /nldi-crawler-py
 WORKDIR /nldi-crawler-py
-
-# Running into issue with thread limits 'RuntimeError: can't start new thread'
-RUN pip install -U pip
-RUN pip install -U setuptools
+RUN pip install -U pip setuptools
 RUN pip install poetry
 COPY . .
 RUN poetry install
