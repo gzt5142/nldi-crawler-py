@@ -14,6 +14,11 @@ LABEL maintainer2="Erik Wojtylko <ewojtylko@usgs.gov>"
 COPY ./docker/DOIRootCA2.cer /usr/local/share/ca-certificates/DOIRootCA2.crt
 RUN chmod 644 /usr/local/share/ca-certificates/DOIRootCA2.crt && update-ca-certificates
 
+# Issue check for DOIRootCA2.crt present in ca-certs
+ARG CA_BUNDLE_DESTINATION=/usr/local/share/ca-certificates/DOIRootCA2.crt
+RUN python -c "x=open('$CA_BUNDLE_DESTINATION').read(); y=open('/etc/ssl/certs/ca-certificates.crt').read(); exit(0) if x in y else exit(-1)"
+
+
 ENV PIP_CERT="/etc/ssl/certs/ca-certificates.crt" \
     SSL_CERT_FILE="/etc/ssl/certs/ca-certificates.crt" \
     CURL_CA_BUNDLE="/etc/ssl/certs/ca-certificates.crt" \
