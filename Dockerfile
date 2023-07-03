@@ -26,6 +26,7 @@ FROM root-cert as ubuntu-base
 
 RUN mkdir -p /nldi-crawler-py
 WORKDIR /nldi-crawler-py
+RUN pip install -U pip setuptools
 RUN pip install poetry
 COPY . .
 RUN poetry install
