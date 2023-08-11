@@ -31,6 +31,6 @@ RUN pip install poetry
 COPY . .
 RUN poetry install
 
-CMD poetry run nldi-cli -vv ${CRAWLER_SOURCE_ID}
+CMD poetry run nldi-cli -vv ingest ${CRAWLER_SOURCE_ID}
 #RUN poetry add psycopg-binary
 # The rest...  also need to clean up chaff
